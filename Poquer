@@ -1,0 +1,18 @@
+/**
+ * Interfaz que define los metodos que se usaran 
+ * en las diferentes versiones del Poquer.
+ *
+ * @author (AYJB - LGLM)
+ * @version (MAY 2025)
+ */
+
+package proyectofinal;
+import java.util.List; 
+
+public interface Poquer {
+    void iniciarRonda(List<Jugador> jugadores, Baraja baraja); 
+    void rondaApuestas(List<Jugador> jugadores, Bote bote);
+    void rondaDescarte(List<Jugador> jugadores, Baraja baraja); 
+    void rondaEnfrentamiento(List<Jugador> jugadores);
+    Jugador determinarGanador(List<Jugador> jugadores); 
+}
