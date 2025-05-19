@@ -5,6 +5,7 @@
  * @version (MAY 2025)
  */
 
+package proyectofinal;
 import java.util.ArrayList;
 import java.util.Collections;
 
