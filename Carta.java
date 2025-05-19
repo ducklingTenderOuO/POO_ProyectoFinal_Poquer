@@ -1,75 +1,48 @@
 /**
- * Write a description of class Carta here.
- *
+ * Representa una carta individual con valor, figura, color y estado (boca arriba/abajo).
  * @author (AYJB - LGLM)
  * @version (MAY 2025)
  */
 
+package proyectofinal; 
+
 public class Carta {
-    private int valor;
-    private String figura;
-    private String color;
+    private final int valor;
+    private final String figura;
+    private final String color;
     private boolean bocaArriba;
 
-    /**
-     * Constructor que inicializa una carta con valor, figura y color.
-     */
     public Carta(int valor, String figura, String color, boolean bocaArriba) {
         this.valor = valor;
         this.figura = figura;
         this.color = color;
-        this.bocaArriba = false;
+        this.bocaArriba = bocaArriba;
     }
 
-    /**
-     * Obtiene el valor de la carta.
-     * @return 
-     */
-    public int getValor() {
-        return valor;
-    }
-    
-    /**
-     * Obtiene la figura de la carta.
-     * @return 
-     */
-    public String getFigura() {
-        return figura;
-    }
-    
-    /**
-     * Obtiene la figura de la carta.
-     * @return 
-     */
-    public String getColor() {
-        return color;
+    public int getValor() { return valor; }
+    public String getFigura() { return figura; }
+    public String getColor() { return color; }
+    public boolean isBocaArriba() { return bocaArriba; }
+
+    public boolean esIgualA(Carta otraCarta) {
+        return otraCarta != null && 
+               valor == otraCarta.getValor() &&
+               figura.equals(otraCarta.getFigura()) &&
+               color.equals(otraCarta.getColor());
     }
 
-    /**
-     * Se representa la carta en forma de texto
-     */
+    public boolean tieneElMismoValor(Carta otraCarta) {
+        return otraCarta != null && valor == otraCarta.getValor();
+    }
+
+    public boolean tieneLaMismaFigura(Carta otraCarta) {
+        return otraCarta != null && figura.equals(otraCarta.getFigura());
+    }
+
     @Override
     public String toString() {
-        return valor + " de " + figura + " (" + color + ")";
-    }
-    
-    public boolean esIgualA(Carta otraCarta){
-        if (valor == otraCarta.getValor()){
-            if (figura.equals(otraCarta.getFigura())){
-                if (color.equals(otraCarta.getColor())){
-                    return true;
-                }
-            } else {
-            }
-        }
-        return false;
-    }
-    
-    public boolean tieneElMismoValor(Carta otraCarta){
-        return valor == otraCarta.getValor();
-    }
-    
-    public boolean tieneLaMismaFigura(Carta otraCarta){
-        return figura.equals(otraCarta.getFigura());
+        String[] nombres = {"As", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"};
+        String valorStr = (valor >= 1 && valor <= 13) ? nombres[valor - 1] : "?";
+        return valorStr + " de " + figura + " (" + color + ")" + (bocaArriba ? " ↑" : " ↓");
     }
 }
