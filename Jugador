@@ -1,0 +1,79 @@
+/**
+ * Write a description of class Jugador here.
+ *
+ * @author (AYJB - LGLM)
+ * @version (MAY 2025)
+ */
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Jugador {
+    private String nombre;
+    private List<Carta> mano;
+    private int fichas;
+    private boolean activo; // Indica si el jugador continua en el juego.
+
+    public Jugador(String nombre) {
+        this.nombre = nombre;
+        this.mano = new ArrayList<>();
+        this.fichas = 100; 
+        this.activo = true;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public List<Carta> getMano() {
+        return mano;
+    }
+
+    public void recibirCarta(Carta carta) {
+        mano.add(carta);
+    }
+
+    /**
+     * Vacia la mano del jugador cuando decide retirse.
+     */    
+    public void limpiarMano() {
+        mano.clear();
+    }
+
+    public int getFichas() {
+        return fichas;
+    }
+
+    /**
+    * Controla las fichas que gana o pierde el jugador.
+    */
+   public boolean ajustarFichas(int cantidad) {
+       if (cantidad < 0 && fichas + cantidad < 0) {
+           // No tiene suficientes fichas para cubrir la apuesta
+           return false;
+       }
+       this.fichas += cantidad;
+       return true;
+   }
+
+    public boolean estaActivo() {
+        return activo;
+    }
+
+    public void retirarse() {
+        this.activo = false;
+    }
+
+    /**
+     * Se aplica al inicio de cada ronda para poder dar una nueva mano.
+     */ 
+    public void reiniciarEstado() {
+        this.activo = true;
+        limpiarMano();
+    }
+
+    @Override
+    public String toString() {
+        return nombre + " | Fichas: " + fichas + " | Mano: " + mano;
+    }
+}
