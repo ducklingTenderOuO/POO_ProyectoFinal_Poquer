@@ -1,8 +1,8 @@
 /**
  * Write a description of class Baraja here.
  *
- * @author (AYJB)
- * @version (FEB 2025)
+ * @author (AYJB - LGLM)
+ * @version (MAY 2025)
  */
 
 import java.util.ArrayList;
@@ -21,12 +21,14 @@ public class Baraja {
         private int valor;
         private String figura;
         private String color;
+        private boolean bocaArriba;
 
         // Constructor
-        public Carta(int valor, String figura, String color) {
+        public Carta(int valor, String figura, String color, boolean bocaArriba) {
             this.valor = valor;
             this.figura = figura;
             this.color = color;
+            this.bocaArriba = false;
         }
 
         // Método para obtener la representación textual de la carta
@@ -44,12 +46,13 @@ public class Baraja {
         cartas = new ArrayList<>();
         String[] figuras = {"Corazones", "Diamantes", "Tréboles", "Picas"};
         String color;
+        boolean bocaArriba = false;
 
         for (String figura : figuras) {
             color = (figura.equals("Corazones") || figura.equals("Diamantes")) ? "Rojo" : "Negro";
 
             for (int valor = 1; valor <= 13; valor++) {
-                cartas.add(new Carta(valor, figura, color));
+                cartas.add(new Carta(valor, figura, color, bocaArriba));
             }
         }
     }
@@ -63,6 +66,7 @@ public class Baraja {
 
     /**
      * Extrae una carta del tope de la baraja.
+     * @return 
      */
     public Carta sacarCarta() {
         if (!cartas.isEmpty()) {
@@ -74,6 +78,7 @@ public class Baraja {
 
     /**
      * Devuelve el número de cartas restantes en la baraja.
+     * @return 
      */
     public int cartasRestantes() {
         return cartas.size();
