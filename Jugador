@@ -5,6 +5,7 @@
  * @version (MAY 2025)
  */
 
+package proyectofinal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,10 +16,10 @@ public class Jugador {
     private boolean activo; // Indica si el jugador continua en el juego.
 
     public Jugador(String nombre) {
-        this.nombre = nombre;
-        this.mano = new ArrayList<>();
-        this.fichas = 100; 
-        this.activo = true;
+    this.nombre = nombre;
+    this.mano = new ArrayList<>();
+    this.fichas = 100;
+    this.activo = true;
     }
 
     public String getNombre() {
@@ -46,6 +47,8 @@ public class Jugador {
 
     /**
     * Controla las fichas que gana o pierde el jugador.
+     * @param cantidad
+     * @return 
     */
    public boolean ajustarFichas(int cantidad) {
        if (cantidad < 0 && fichas + cantidad < 0) {
