@@ -1,0 +1,62 @@
+/**
+ * Gestiona las fichas apostadas por los jugadores y su distribución al ganador.
+ *
+ * @author (AYJB - LGLM)
+ * @version (MAY 2025)
+ */
+
+package proyectofinal;
+import java.util.List;
+
+public class Bote {
+    private int cantidad;
+
+    public Bote() {
+        this.cantidad = 0;
+    }
+
+    /**
+     * Añade fichas al bote desde un jugador.
+     */
+    public boolean apostar(Jugador jugador, int cantidad) {
+        if (jugador.estaActivo() && jugador.ajustarFichas(-cantidad)) {
+            this.cantidad += cantidad;
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Entrega el bote al jugador ganador.
+     */
+    public void entregarGanador(Jugador ganador) {
+        if (ganador != null && ganador.estaActivo()) {
+            ganador.ajustarFichas(this.cantidad);
+            this.cantidad = 0;
+        }
+    }
+
+    /**
+     * Entrega el bote dividido entre varios ganadores (si hay empate).
+     */
+    public void dividirBote(List<Jugador> ganadores) {
+        if (ganadores != null && !ganadores.isEmpty()) {
+            int montoPorJugador = this.cantidad / ganadores.size();
+            for (Jugador ganador : ganadores) {
+                if (ganador.estaActivo()) {
+                    ganador.ajustarFichas(montoPorJugador);
+                }
+            }
+            this.cantidad = 0;
+        }
+    }
+
+    public int getCantidad() {
+        return this.cantidad;
+    }
+
+    @Override
+    public String toString() {
+        return "Bote: " + this.cantidad + " fichas";
+    }
+}
