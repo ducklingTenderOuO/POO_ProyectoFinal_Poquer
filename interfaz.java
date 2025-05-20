@@ -7,6 +7,7 @@ import javax.swing.border.Border;
 import java.awt.Font;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 /**
@@ -45,6 +46,7 @@ public class Interfaz extends javax.swing.JFrame {
     public Interfaz() {
         initComponents();
         personalizarInterfaz();
+        mostrarCincoCartasAleatorias();
     }
 
     private void personalizarInterfaz() {
@@ -130,6 +132,30 @@ public class Interfaz extends javax.swing.JFrame {
         apuestaJuego.append("Disminuyendo apuesta...\n");
     }
 
+    private void mostrarCincoCartasAleatorias() {
+        panelManoJugador.removeAll();
+        ArrayList<Carta> baraja = new ArrayList<>();
+        String[] figuras = {"Corazon", "Diamante", "Trebol", "Pica"};
+        String[] colores = {"Rojo", "Rojo", "Negro", "Negro"};
+
+        for (int i = 0; i < figuras.length; i++) {
+            for (int valor = 1; valor <= 13; valor++) {
+                baraja.add(new Carta(valor, figuras[i], colores[i], true)); // Boca arriba
+            }
+        }
+
+        java.util.Collections.shuffle(baraja);
+        for (int i = 0; i < 5; i++) {
+            Carta carta = baraja.get(i);
+            JLabel cartaLabel = new JLabel(new ImageIcon(getClass().getResource(carta.getRutaImagen())));
+            panelManoJugador.add(cartaLabel);
+        }
+
+        panelManoJugador.revalidate();
+        panelManoJugador.repaint();
+    }
+
+    
     @SuppressWarnings("unchecked")
     private void initComponents() {
         // Componentes principales
