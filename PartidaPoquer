@@ -1,0 +1,85 @@
+/**
+ * Interfaz que define los metodos que se usaran 
+ * en las diferentes versiones del Poquer.
+ *
+ * @author (AYJB - LGLM)
+ * @version (MAY 2025)
+ */
+
+package proyectofinal;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JOptionPane;
+
+public class PartidaPoquer {
+    private Poquer juego; 
+
+    // Constructor que acepta CUALQUIER implementación de Poquer
+    public PartidaPoquer(Poquer juego) {
+        this.juego = juego;
+    }
+
+    public void iniciarPartida(List<Jugador> jugadores) {
+        Baraja baraja = new Baraja();
+        Bote bote = new Bote();
+        
+        juego.iniciarRonda(jugadores, baraja);
+        juego.rondaApuestas(jugadores, bote);
+        juego.rondaDescarte(jugadores, baraja);
+        juego.rondaEnfrentamiento(jugadores);
+        juego.determinarGanador(jugadores);
+    }
+
+    public static void main(String[] args) {
+        // SELECION DEL JUEGO
+        Object[] opcionesJuego = {"Five Cards", "Texas Hold'em"};
+        int seleccionJuego = JOptionPane.showOptionDialog(
+            null,
+            "¡Bienvenido al Poquer!\nSeleccione el tipo de juego:",
+            "Configuración Inicial",
+            JOptionPane.DEFAULT_OPTION,
+            JOptionPane.QUESTION_MESSAGE,
+            null,
+            opcionesJuego,
+            opcionesJuego[0]
+        );
+
+        if (seleccionJuego == -1) System.exit(0); // Si cierra la ventana
+
+        // CANTIDAD DE JUGADORES
+        List<Jugador> jugadores = new ArrayList<>();
+        Integer[] opcionesJugadores = {2, 3, 4, 5, 6, 7};
+        
+        Integer numJugadores = (Integer) JOptionPane.showInputDialog(
+            null,
+            "Número de jugadores:",
+            "Configuración",
+            JOptionPane.QUESTION_MESSAGE,
+            null,
+            opcionesJugadores,
+            opcionesJugadores[0]
+        );
+
+        if (numJugadores == null) System.exit(0);
+
+        // NOMBRE DE JUGADORES
+        for (int i = 0; i < numJugadores; i++) {
+            String nombre = JOptionPane.showInputDialog(
+                null,
+                "Nombre del Jugador " + (i + 1) + ":",
+                "Registro",
+                JOptionPane.QUESTION_MESSAGE
+            );
+            
+            if (nombre == null || nombre.trim().isEmpty()) {
+                nombre = "Jugador " + (i + 1); // Nombre por defecto
+            }
+            jugadores.add(new Jugador(nombre.trim()));
+        }
+
+        Poquer juego = (seleccionJuego == 0) ? new FiveCards() : new TexasHoldEm();
+        
+        // Aqui es donde entra la interfaz grafica
+        //});
+    }
+}
