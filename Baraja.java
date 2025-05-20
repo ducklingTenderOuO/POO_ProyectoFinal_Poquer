@@ -20,14 +20,13 @@ public class Baraja {
      */
     public Baraja() {
         cartas = new ArrayList<>();
-        String[] figuras = {"Corazones", "Diamantes", "Tréboles", "Picas"};
-        boolean bocaArriba = false;
+        String[] figuras = {"Corazon", "Diamante", "Trebol", "Pica"};
 
         for (String figura : figuras) {
-            String color = (figura.equals("Corazones") || figura.equals("Diamantes")) ? "Rojo" : "Negro";
+            String color = (figura.equals("Corazon") || figura.equals("Diamante")) ? "Rojo" : "Negro";
 
             for (int valor = 1; valor <= 13; valor++) {
-                cartas.add(new Carta(valor, figura, color, bocaArriba));
+                cartas.add(new Carta(valor, figura, color));
             }
         }
     }
