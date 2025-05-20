@@ -7,39 +7,39 @@ import java.util.List;
 public class PartidaPoquer {
     private String tipoJuego;
     private List<Jugador> jugadores;
-    
+
     public PartidaPoquer(String tipoJuego, List<Jugador> jugadores) {
         this.tipoJuego = tipoJuego;
         this.jugadores = jugadores;
     }
-    
+
     public void iniciarPartida() {
-        // Iniciar la partida según el tipo de juego
         if ("Texas Hold'em".equals(tipoJuego)) {
             iniciarTexasHoldem();
         } else {
             iniciarFiveCardDraw();
         }
     }
-    
+
     private void iniciarTexasHoldem() {
-        JOptionPane.showMessageDialog(null, 
+        JOptionPane.showMessageDialog(null,
             "Iniciando partida de Texas Hold'em con " + jugadores.size() + " jugadores",
             "Partida Iniciada", JOptionPane.INFORMATION_MESSAGE);
+        // Aquí podrías llamar a una futura clase TexasHoldemGUI si la implementas
     }
-    
+
     private void iniciarFiveCardDraw() {
-        JOptionPane.showMessageDialog(null, 
-            "Iniciando partida de Five Card Draw con " + jugadores.size() + " jugadores",
-            "Partida Iniciada", JOptionPane.INFORMATION_MESSAGE);
+        SwingUtilities.invokeLater(() -> {
+            FiveCardsGUI gui = new FiveCardsGUI(jugadores);
+            gui.iniciarJuego();  // Asegúrate de que iniciarJuego() esté definido en FiveCardsGUI
+        });
     }
-    
+
     public static void main(String[] args) {
-        // Configuración inicial del juego
         Object[] opcionesJuego = {"Five Card Draw", "Texas Hold'em"};
         int seleccionJuego = JOptionPane.showOptionDialog(
             null,
-            "¡Bienvenido al Poquer!\nSeleccione el tipo de juego:",
+            "¡Bienvenido al Póquer!\nSeleccione el tipo de juego:",
             "Configuración Inicial",
             JOptionPane.DEFAULT_OPTION,
             JOptionPane.QUESTION_MESSAGE,
@@ -50,7 +50,6 @@ public class PartidaPoquer {
 
         if (seleccionJuego == -1) System.exit(0);
 
-        // JUGS
         Integer[] opcionesJugadores = {2, 3, 4, 5, 6, 7};
         Integer numJugadores = (Integer) JOptionPane.showInputDialog(
             null,
@@ -64,7 +63,6 @@ public class PartidaPoquer {
 
         if (numJugadores == null) System.exit(0);
 
-        // NOMBRES
         List<Jugador> jugadores = new ArrayList<>();
         for (int i = 0; i < numJugadores; i++) {
             String nombre = JOptionPane.showInputDialog(
@@ -73,21 +71,15 @@ public class PartidaPoquer {
                 "Registro",
                 JOptionPane.QUESTION_MESSAGE
             );
-            
+
             if (nombre == null || nombre.trim().isEmpty()) {
                 nombre = "Jugador " + (i + 1);
             }
             jugadores.add(new Jugador(nombre.trim()));
         }
 
-        // most ig lesly
-        SwingUtilities.invokeLater(() -> {
-            Interfaz pokerGUI = new Interfaz();
-            pokerGUI.setVisible(true);
-            pokerGUI.iniciarJuegoConDatos(
-                seleccionJuego == 0 ? "Five Card Draw" : "Texas Hold'em", //ternario
-                new ArrayList<>(jugadores)
-            );
-        });
+        String tipoJuegoSeleccionado = seleccionJuego == 0 ? "Five Card Draw" : "Texas Hold'em";
+        PartidaPoquer partida = new PartidaPoquer(tipoJuegoSeleccionado, jugadores);
+        partida.iniciarPartida();
     }
 }
