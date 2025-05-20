@@ -107,8 +107,14 @@ public class Interfaz extends javax.swing.JFrame {
 
     private void manejarApuesta() {
         String monto = JOptionPane.showInputDialog(this, "Ingrese monto a apostar:");
-        if (monto != null && !monto.isEmpty()) {
-            apuestaJuego.append("Apuesta: $" + monto + "\n");
+        try {
+            int cantidad = Integer.parseInt(monto);
+            Jugador jugadorActual = jugadores.get(0); // o el que esté en turno
+            jugadorActual.apostar(cantidad);
+            apuestaJuego.append(jugadorActual.getNombre() + " apostó $" + cantidad + "\n");
+            actualizarInformacionJugadores();
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Monto inválido.");
         }
     }
 
