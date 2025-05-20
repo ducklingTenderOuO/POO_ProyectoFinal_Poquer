@@ -14,7 +14,9 @@ public class Jugador {
     private List<Carta> mano;
     private int fichas;
     private boolean activo; // Indica si el jugador continua en el juego.
-
+    private Jugada jugada; // La mejor jugada que tiene el jugador en la ronda
+    private int cartasDescartadas = 0;
+    
     public Jugador(String nombre) {
     this.nombre = nombre;
     this.mano = new ArrayList<>();
@@ -47,8 +49,8 @@ public class Jugador {
 
     /**
     * Controla las fichas que gana o pierde el jugador.
-     * @param cantidad
-     * @return 
+    * @param cantidad
+    * @return 
     */
    public boolean ajustarFichas(int cantidad) {
        if (cantidad < 0 && fichas + cantidad < 0) {
@@ -79,4 +81,40 @@ public class Jugador {
     public String toString() {
         return nombre + " | Fichas: " + fichas + " | Mano: " + mano;
     }
+
+    public boolean apostar(int cantidad) {
+        if (cantidad <= 0) return false;
+        return ajustarFichas(-cantidad);
+    }
+    
+    public void descartarCartas(List<Integer> indices) {
+        // Ordenar índices en orden descendente para evitar problemas al eliminar
+        indices.sort((a, b) -> b - a);
+        for (int i : indices) {
+            if (i >= 0 && i < mano.size()) {
+                mano.remove(i);
+            }
+        }
+        this.cartasDescartadas = indices.size();
+    }
+    
+    public int getCartasDescartadas() {
+        return cartasDescartadas;
+    }
+
+    public void mostrarMano() {
+        for (int i = 0; i < mano.size(); i++) {
+            System.out.println(i + ": " + mano.get(i));
+        }
+    }
+    
+     public Jugada getJugada() {
+        return jugada;
+    }
+
+    public void setJugada(Jugada jugada) {
+        this.jugada = jugada;
+    }
+    
+    
 }
