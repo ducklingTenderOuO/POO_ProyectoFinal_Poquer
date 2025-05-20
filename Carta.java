@@ -45,4 +45,15 @@ public class Carta {
         String valorStr = (valor >= 1 && valor <= 13) ? nombres[valor - 1] : "?";
         return valorStr + " de " + figura + " (" + color + ")" + (bocaArriba ? " ↑" : " ↓");
     }
+
+    public String getRutaImagen() {
+        if (!bocaArriba) {
+            return "/proyectofinal/imagenes/volteada.png";
+        }
+
+        String figuraStr = figura.toLowerCase();     
+        String valorStr = String.valueOf(valor);     
+
+        return "/proyectofinal/imagenes/" + figuraStr + valorStr + ".png";
+    }
 }
