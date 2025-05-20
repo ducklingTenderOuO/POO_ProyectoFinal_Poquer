@@ -1,38 +1,42 @@
-/**
- * Interfaz que define los metodos que se usaran 
- * en las diferentes versiones del Poquer.
- *
- * @author (AYJB - LGLM)
- * @version (MAY 2025)
- */
-
 package proyectofinal;
+
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JOptionPane;
 
 public class PartidaPoquer {
-    private Poquer juego; 
-
-    // Constructor que acepta CUALQUIER implementación de Poquer
-    public PartidaPoquer(Poquer juego) {
-        this.juego = juego;
+    private String tipoJuego;
+    private List<Jugador> jugadores;
+    
+    public PartidaPoquer(String tipoJuego, List<Jugador> jugadores) {
+        this.tipoJuego = tipoJuego;
+        this.jugadores = jugadores;
     }
-
-    public void iniciarPartida(List<Jugador> jugadores) {
-        Baraja baraja = new Baraja();
-        Bote bote = new Bote();
-        
-        juego.iniciarRonda(jugadores, baraja);
-        juego.rondaApuestas(jugadores, bote);
-        juego.rondaDescarte(jugadores, baraja);
-        juego.rondaEnfrentamiento(jugadores);
-        juego.determinarGanador(jugadores);
+    
+    public void iniciarPartida() {
+        // Iniciar la partida según el tipo de juego
+        if ("Texas Hold'em".equals(tipoJuego)) {
+            iniciarTexasHoldem();
+        } else {
+            iniciarFiveCardDraw();
+        }
     }
-
+    
+    private void iniciarTexasHoldem() {
+        JOptionPane.showMessageDialog(null, 
+            "Iniciando partida de Texas Hold'em con " + jugadores.size() + " jugadores",
+            "Partida Iniciada", JOptionPane.INFORMATION_MESSAGE);
+    }
+    
+    private void iniciarFiveCardDraw() {
+        JOptionPane.showMessageDialog(null, 
+            "Iniciando partida de Five Card Draw con " + jugadores.size() + " jugadores",
+            "Partida Iniciada", JOptionPane.INFORMATION_MESSAGE);
+    }
+    
     public static void main(String[] args) {
-        // SELECION DEL JUEGO
-        Object[] opcionesJuego = {"Five Cards", "Texas Hold'em"};
+        // Configuración inicial del juego
+        Object[] opcionesJuego = {"Five Card Draw", "Texas Hold'em"};
         int seleccionJuego = JOptionPane.showOptionDialog(
             null,
             "¡Bienvenido al Poquer!\nSeleccione el tipo de juego:",
@@ -44,12 +48,10 @@ public class PartidaPoquer {
             opcionesJuego[0]
         );
 
-        if (seleccionJuego == -1) System.exit(0); // Si cierra la ventana
+        if (seleccionJuego == -1) System.exit(0);
 
-        // CANTIDAD DE JUGADORES
-        List<Jugador> jugadores = new ArrayList<>();
+        // JUGS
         Integer[] opcionesJugadores = {2, 3, 4, 5, 6, 7};
-        
         Integer numJugadores = (Integer) JOptionPane.showInputDialog(
             null,
             "Número de jugadores:",
@@ -62,7 +64,8 @@ public class PartidaPoquer {
 
         if (numJugadores == null) System.exit(0);
 
-        // NOMBRE DE JUGADORES
+        // NOMBRES
+        List<Jugador> jugadores = new ArrayList<>();
         for (int i = 0; i < numJugadores; i++) {
             String nombre = JOptionPane.showInputDialog(
                 null,
@@ -72,14 +75,19 @@ public class PartidaPoquer {
             );
             
             if (nombre == null || nombre.trim().isEmpty()) {
-                nombre = "Jugador " + (i + 1); // Nombre por defecto
+                nombre = "Jugador " + (i + 1);
             }
             jugadores.add(new Jugador(nombre.trim()));
         }
 
-        Poquer juego = (seleccionJuego == 0) ? new FiveCards() : new TexasHoldEm();
-        
-        // Aqui es donde entra la interfaz grafica
-        //});
+        // most ig lesly
+        SwingUtilities.invokeLater(() -> {
+            Interfaz pokerGUI = new Interfaz();
+            pokerGUI.setVisible(true);
+            pokerGUI.iniciarJuegoConDatos(
+                seleccionJuego == 0 ? "Five Card Draw" : "Texas Hold'em", //ternario
+                new ArrayList<>(jugadores)
+            );
+        });
     }
 }
