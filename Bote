@@ -10,20 +10,25 @@ import java.util.List;
 
 public class Bote {
     private int cantidad;
+    private int ultimaApuesta;
 
     public Bote() {
         this.cantidad = 0;
     }
 
     /**
-     * Añade fichas al bote desde un jugador.
+     * Recibe fichas apostadas por un jugador.
+     * @param cantidad Fichas a agregar al bote.
      */
-    public boolean apostar(Jugador jugador, int cantidad) {
-        if (jugador.estaActivo() && jugador.ajustarFichas(-cantidad)) {
+    public void agregarApuesta(int cantidad) {
+        if (cantidad > 0) {
             this.cantidad += cantidad;
-            return true;
+            this.ultimaApuesta = cantidad;
         }
-        return false;
+    }
+
+    public int getUltimaApuesta() {
+        return this.ultimaApuesta;
     }
 
     /**
@@ -37,7 +42,7 @@ public class Bote {
     }
 
     /**
-     * Entrega el bote dividido entre varios ganadores (si hay empate).
+     * Entrega el bote dividido entre varios ganadores (para empates).
      */
     public void dividirBote(List<Jugador> ganadores) {
         if (ganadores != null && !ganadores.isEmpty()) {
@@ -51,6 +56,10 @@ public class Bote {
         }
     }
 
+    public void limpiar() {
+        cantidad = 0;
+    }
+    
     public int getCantidad() {
         return this.cantidad;
     }
