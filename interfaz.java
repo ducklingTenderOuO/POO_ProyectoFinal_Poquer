@@ -1,9 +1,12 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package proyectofinal;
 
+import java.awt.Color;
+import java.util.ArrayList;
+import javax.swing.BorderFactory;
+import javax.swing.JOptionPane;
+import javax.swing.border.Border;
+import java.awt.Font;
+import javax.swing.ImageIcon;
 /**
  *
  * @author llesl
@@ -26,6 +29,8 @@ public class interfaz extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jTextField1 = new javax.swing.JTextField();
+        jRadioButton1 = new javax.swing.JRadioButton();
         retirarse = new javax.swing.JButton();
         igualar = new javax.swing.JButton();
         decrementar = new javax.swing.JButton();
@@ -35,7 +40,19 @@ public class interfaz extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         panelManoJugador = new javax.swing.JPanel();
-        panelJuego = new javax.swing.JPanel();
+        iniciarJuego = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        apuestaJuego = new javax.swing.JTextArea();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        faseJuego = new javax.swing.JTextArea();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        fichasJugador = new javax.swing.JTextArea();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        mesa = new javax.swing.JTextPane();
+
+        jTextField1.setText("jTextField1");
+
+        jRadioButton1.setText("jRadioButton1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 51, 102));
@@ -73,75 +90,101 @@ public class interfaz extends javax.swing.JFrame {
         panelManoJugador.setLayout(panelManoJugadorLayout);
         panelManoJugadorLayout.setHorizontalGroup(
             panelManoJugadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 358, Short.MAX_VALUE)
         );
         panelManoJugadorLayout.setVerticalGroup(
             panelManoJugadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
-        panelJuego.setBackground(new java.awt.Color(0, 0, 102));
+        iniciarJuego.setText("Iniciar Juego");
+        iniciarJuego.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                iniciarJuegoActionPerformed(evt);
+            }
+        });
 
-        javax.swing.GroupLayout panelJuegoLayout = new javax.swing.GroupLayout(panelJuego);
-        panelJuego.setLayout(panelJuegoLayout);
-        panelJuegoLayout.setHorizontalGroup(
-            panelJuegoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        panelJuegoLayout.setVerticalGroup(
-            panelJuegoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
+        apuestaJuego.setColumns(20);
+        apuestaJuego.setRows(5);
+        jScrollPane1.setViewportView(apuestaJuego);
+
+        faseJuego.setColumns(20);
+        faseJuego.setRows(5);
+        jScrollPane2.setViewportView(faseJuego);
+
+        fichasJugador.setColumns(20);
+        fichasJugador.setRows(5);
+        jScrollPane3.setViewportView(fichasJugador);
+
+        jScrollPane4.setViewportView(mesa);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(54, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(iniciarJuego)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(retirarse)
+                        .addGap(18, 18, 18)
+                        .addComponent(igualar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(decrementar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(apostar)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton1)
+                .addGap(18, 18, 18)
+                .addComponent(pasar)
+                .addGap(18, 18, 18)
+                .addComponent(jButton2)
+                .addGap(52, 52, 52))
             .addGroup(layout.createSequentialGroup()
                 .addGap(14, 14, 14)
                 .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(39, Short.MAX_VALUE)
-                .addComponent(retirarse)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(panelJuego, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(igualar)
-                            .addGap(32, 32, 32)
-                            .addComponent(decrementar)
-                            .addGap(18, 18, 18)
-                            .addComponent(apostar)
-                            .addGap(18, 18, 18)
-                            .addComponent(jButton1)
-                            .addGap(28, 28, 28)
-                            .addComponent(pasar))
-                        .addComponent(panelManoJugador, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGap(18, 18, 18)
-                .addComponent(jButton2)
-                .addGap(37, 37, 37))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(panelManoJugador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(83, 83, 83)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                        .addGap(130, 130, 130))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 358, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(panelJuego, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panelManoJugador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(retirarse)
-                    .addComponent(igualar)
-                    .addComponent(decrementar)
                     .addComponent(apostar)
+                    .addComponent(decrementar)
                     .addComponent(jButton1)
                     .addComponent(pasar)
-                    .addComponent(jButton2))
-                .addGap(31, 31, 31))
+                    .addComponent(jButton2)
+                    .addComponent(igualar)
+                    .addComponent(retirarse))
+                .addGap(27, 27, 27)
+                .addComponent(iniciarJuego)
+                .addGap(146, 146, 146))
         );
 
         pack();
@@ -155,6 +198,79 @@ public class interfaz extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_retirarseActionPerformed
 
+    private void iniciarJuegoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_iniciarJuegoActionPerformed
+        // TODO add your handling code here:
+        int cantJugadores = 0;
+        /**
+         * Se muestra una ventana JOptionPane InputDialog con el cual el usuario
+         * ingresara la cantidad de jugadores que tendra la partida, se captura
+         * lo ingresado en una String
+         */
+        do {
+            String jugadores = JOptionPane.showInputDialog(this,
+                    "Ingrese la cantidad de jugadores (2 a 10 jugadores):");
+            if (jugadores == null) {
+                return; // Usuario canceló
+            }
+            //despues se transforma esa string a un Int mediante el metodo de integer.parseint
+            try {
+                cantJugadores = Integer.parseInt(jugadores);
+                if (cantJugadores <= 1 || cantJugadores > 10) {
+                    JOptionPane.showMessageDialog(this, "De 2 a 10 jugadores", "Error",
+                            JOptionPane.ERROR_MESSAGE);
+                }
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(this, "Por favor "
+                        + "ingrese un número entero válido.", "Error",
+                        JOptionPane.ERROR_MESSAGE);
+            }
+        } while (cantJugadores <= 1 || cantJugadores > 10);
+
+        // PIDE LOS  NOMBRES DE JUGADORES PARA CREARLOS Y GUARDARLOS EN UN ARRAYL
+        ArrayList<Jugador> jugadores = new ArrayList<>();
+
+        for (int i = 0; i < cantJugadores; i++) {
+            String nombre;
+            do {
+                nombre = JOptionPane.showInputDialog(this,
+                        "Ingrese el nombre del jugador " + (i + 1) + ": ");
+            } while (nombre.isEmpty());
+
+            Jugador jugador = new Jugador(nombre);
+            jugadores.add(jugador);
+        }
+
+    }//GEN-LAST:event_iniciarJuegoActionPerformed
+
+   // public void actualizarInterfaz() {
+    //    estadoJugadores.setText(juego.obtenerPalabrasConPuntos());
+    //    letrasDisponibles.setText(juego.infoTurno());
+
+   // }
+    
+    public void actualizarMesa() {
+        mesa.setText("");
+
+        //por cada carta en la mesa
+        for (Carta carta : juego.getDadosMesa()) {
+
+            //se ingresa la ruta de la imagen de la carta
+            String imagenRuta = "C:\\Users\\llesl\\Documents\\NetBeansProjects\\ProyectoFinal\\src"
+                    + getNombreImagen(carta);
+
+            //se crea una imageIcon con la imagen de la carta
+            ImageIcon icon = new ImageIcon(imagenRuta);
+
+            //se inserta la imagen de la carta en la mesa
+            mesa.insertIcon(icon);
+        }
+    }
+    
+     public String getNombreImagen(Carta carta) {
+        String valor = String.valueOf(carta.getValor());
+        return "carta" + valor + ".png";
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -192,12 +308,22 @@ public class interfaz extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton apostar;
+    private javax.swing.JTextArea apuestaJuego;
     private javax.swing.JButton decrementar;
+    private javax.swing.JTextArea faseJuego;
+    private javax.swing.JTextArea fichasJugador;
     private javax.swing.JButton igualar;
+    private javax.swing.JButton iniciarJuego;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JPanel panelJuego;
+    private javax.swing.JRadioButton jRadioButton1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextPane mesa;
     private javax.swing.JPanel panelManoJugador;
     private javax.swing.JButton pasar;
     private javax.swing.JButton retirarse;
